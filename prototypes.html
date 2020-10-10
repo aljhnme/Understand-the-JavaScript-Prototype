@@ -1,0 +1,191 @@
+<script type="text/javascript">
+	
+/*In this tutorial, you will learn about prototypes in JavaScript with the help of examples.
+Before you learn prototypes, be sure to check these tutorials:
+
+JavaScript Objects
+JavaScript Constructor Function
+As you know, you can create an object in JavaScript using an object constructor function. For example,
+*/
+
+// constructor function
+function Person () {
+    this.name = 'John',
+    this.age = 23
+}
+
+// creating objects
+let person1 = new Person();
+let person2 = new Person();
+
+/*
+
+   In the above example,function Person() is an object constructor function. We have created two objects person1 and person2 from it.
+
+ JavaScript Prototype
+
+    In JavaScript, every function and object has a property named prototype by default. For example,
+*/
+
+function Person () {
+    this.name = 'John',
+    this.age = 23
+}
+
+let person = new Person(); 
+console.log(Person.prototype);
+
+/*
+In the above example, we are trying to access the prototype property of a Person constructor function.
+
+Since the prototype property has no value at the moment, it shows an empty object { ... }.
+
+Prototype Inheritance
+
+In JavaScript, a prototype can be used to add properties and methods to a constructor function. And objects inherit properties and methods from a prototype. For example,
+*/
+
+// constructor function
+function Person () {
+    this.name = 'John',
+    this.age = 23
+}
+
+// creating objects
+let person1 = new Person();
+let person2 = new Person();
+
+// adding property to constructor function
+Person.prototype.gender = 'male';
+
+// prototype value of Person
+console.log(Person.prototype);
+
+// inheriting the property from prototype
+console.log(person1.gender);
+console.log(person2.gender);
+
+/*
+In the above program, we have added a new property gender to the Person constructor function using:
+*/
+Person.prototype.gender = 'male';
+
+/*
+Then object person1 and person2 inherits the property gender from the prototype property of Person constructor function.
+
+Hence, both objects person1 and person2 can access the gender property.
+
+
+####
+Note: The syntax to add the property to an object constructor function is:
+*/
+objectConstructorName.prototype.key = 'value';
+
+/*
+ Prototype is used to provide additional property to all the objects created from a constructor function
+*/
+
+/*
+Add Methods to a Constructor Function Using Prototype
+
+
+You can also add new methods to a constructor function using prototype. For example,
+*/
+
+// constructor function
+function Person () {
+    this.name = 'John',
+    this.age = 23
+}
+
+// creating objects
+let person1 = new Person();
+let person2 = new Person();
+
+// adding a method to the constructor function
+Person.prototype.greet = function() {
+    console.log('hello' + ' ' +  this.name);
+}
+
+person1.greet(); // hello John
+person2.greet(); // hello John
+
+//In the above program, a new method greet is added to the Person constructor function using a prototype.
+
+
+/*Changing Prototype
+
+If a prototype value is changed, then all the new objects will have the changed property value. All the previously created objects will have the previous value. For example,*/
+
+// constructor function
+function Person() {
+    this.name = 'John'
+}
+
+// add a property
+Person.prototype.age = 20;
+
+// creating an object
+let person1 = new Person();
+
+console.log(person1.age); // 20
+
+// changing the property value of prototype
+Person.prototype = { age: 50 }
+
+// creating new object
+let person3 = new Person();
+
+console.log(person3.age); // 50
+console.log(person1.age); // 20
+
+//Note: You should not modify the prototypes of standard JavaScript built-in objects like strings, arrays, etc. It is considered a bad practice.
+
+/*JavaScript Prototype Chaining
+
+If an object tries to access the same property that is in the constructor function and the prototype object, the object takes the property from the constructor function. For example,
+*/
+
+function Person() {
+    this.name = 'John'
+}
+
+// adding property 
+Person.prototype.name = 'Peter';
+Person.prototype.age = 23
+
+let person1 = new Person();
+
+console.log(person1.name); // John
+console.log(person1.age); // 23
+
+/*In the above program, a property name is declared in the constructor function and also in the prototype property of the constructor function.
+
+When the program executes, person1.name looks in the constructor function to see if there is a property named name. Since the constructor function has the name property with value 'John', the object takes value from that property.
+
+When the program executes, person1.age looks in the constructor function to see if there is a property named age. Since the constructor function doesn't have age property, the program looks into the prototype object of the constructor function and the object inherits property from the prototype object(if available).
+*/
+
+//Note: You can also access the prototype property of a constructor function from an object.
+
+function Person () {
+    this.name = 'John',
+}
+
+// adding a prototype
+Person.prototype.age = 24;
+
+// creating object
+let person = new Person();
+
+// accessing prototype property
+console.log(person.__proto__);   // { age: 24 }
+
+
+
+//In the above example, a person object is used to access the prototype property using __proto__. However, __proto__ has been deprecated and you should avoid using that.
+
+
+
+
+</script>
